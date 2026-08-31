@@ -26,6 +26,20 @@ jobs:
           channel: stable
           cache: true
 
+      - name: Restore Medqur brand assets
+        shell: bash
+        run: |
+          mkdir -p assets
+          curl -fL https://raw.githubusercontent.com/matthewcodergamer/Medqur/main/assets/medqur_logo.png -o assets/medqur_logo.png
+          curl -fL https://raw.githubusercontent.com/matthewcodergamer/Medqur/main/assets/ministry_health_logo.png -o assets/ministry_health_logo.png
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [[ -n "$(git status --porcelain assets)" ]]; then
+            git add assets
+            git commit -m "Restore Medqur brand assets"
+            git push
+          fi
+
       - name: Generate Android and web platform scaffolding
         shell: bash
         run: |
@@ -87,6 +101,13 @@ jobs:
         with:
           channel: stable
           cache: true
+
+      - name: Restore Medqur brand assets
+        shell: bash
+        run: |
+          mkdir -p assets
+          curl -fL https://raw.githubusercontent.com/matthewcodergamer/Medqur/main/assets/medqur_logo.png -o assets/medqur_logo.png
+          curl -fL https://raw.githubusercontent.com/matthewcodergamer/Medqur/main/assets/ministry_health_logo.png -o assets/ministry_health_logo.png
 
       - name: Generate iOS platform scaffolding
         shell: bash
